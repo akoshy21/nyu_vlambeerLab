@@ -11,13 +11,17 @@ using UnityEngine;
 
 public class Pathmaker : MonoBehaviour {
 
-// STEP 2: ============================================================================================
-// translate the pseudocode below
+    // STEP 2: ============================================================================================
+    // translate the pseudocode below
 
-//	DECLARE CLASS MEMBER VARIABLES:
-//	Declare a private integer called counter that starts at 0; 		// counter var will track how many floor tiles I've instantiated
-//	Declare a public Transform called floorPrefab, assign the prefab in inspector;
-//	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
+    //	DECLARE CLASS MEMBER VARIABLES:
+    //	Declare a private integer called counter that starts at 0; 		// counter var will track how many floor tiles I've instantiated
+    //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
+    //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
+
+    private int counter = 0;
+    public Transform floorPrefab;
+    public Transform pathmakerSpherePrefab;
 
 
 	void Update () {
@@ -33,6 +37,35 @@ public class Pathmaker : MonoBehaviour {
 //			Increment counter;
 //		Else:
 //			Destroy my game object; 		// self destruct if I've made enough tiles already
+        if(counter < 50)
+        {
+            float randNum = Random.Range(0.0f, 1.0f);
+
+            if(randNum < 0.25f)
+            {
+                this.transform.Rotate(new Vector3(0,90f,0));
+            }
+            else if(randNum >= 0.25f && randNum < 0.5f)
+            {
+                this.transform.Rotate(new Vector3(0, -90f, 0));
+            }
+            else if(randNum >= 0.99f)
+            {
+                GameObject pathmakerInstance = Instantiate(pathmakerSpherePrefab.gameObject, transform.position, Quaternion.identity);
+            }
+
+            Instantiate(floorPrefab.gameObject, transform.position, Quaternion.identity);
+
+            Debug.Log("facing: " + transform.eulerAngles);
+            this.transform.Translate(Vector3.forward * 5);
+            Debug.Log("position: " + transform.position);
+            counter++;
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 	}
 
 } // end of class scope
