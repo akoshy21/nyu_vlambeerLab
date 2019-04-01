@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{FC6A9C92-C4AC-F837-2D64-E5B951F94CA5}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Pathmaker.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/TileMaster.cs">
     <Files>
-      <File FileName="Assets/scripts/Pathmaker.cs" Line="29" Column="29" />
-      <File FileName="Assets/TileMaster.cs" Line="8" Column="5" />
+      <File FileName="Assets/scripts/Pathmaker.cs" Line="48" Column="30" />
+      <File FileName="Assets/scripts/TileMaster.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

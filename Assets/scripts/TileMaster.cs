@@ -16,10 +16,17 @@ public class TileMaster : MonoBehaviour
 
     public List<GameObject> tiles;
 
+    public GameObject pathmakerPrefab;
+
     private void Update()
     {
         MinMaxDist();
         AdjCamera();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        { 
+            Reset(); 
+        }
     }
 
     void MinMaxDist()
@@ -69,6 +76,24 @@ public class TileMaster : MonoBehaviour
         {
             mainCam.orthographicSize = 2 + (distZ / 1.8f);
         }
+    }
+
+    public void Reset()
+    {
+        GameObject[] allTiles = GameObject.FindGameObjectsWithTag("tile");
+
+        foreach(GameObject tl in allTiles)
+        {
+            Destroy(tl);
+        }
+
+        tiles.Clear();
+        maxX = 0;
+        minX = 0;
+        maxZ = 0;
+        minZ = 0;
+
+        Instantiate(pathmakerPrefab);
     }
 
 }
