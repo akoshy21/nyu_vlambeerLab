@@ -20,9 +20,13 @@ public class Pathmaker : MonoBehaviour {
     //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
 
     private int counter = 0;
-    public Transform floorPrefab;
+    public Transform mtnPrefab;
+    public Transform lkPrefab;
+    public Transform townPrefab;
+
     public Transform pathmakerSpherePrefab;
 
+    public GameObject tileManager;
 
 	void Update () {
 //		If counter is less than 50, then:
@@ -37,7 +41,7 @@ public class Pathmaker : MonoBehaviour {
 //			Increment counter;
 //		Else:
 //			Destroy my game object; 		// self destruct if I've made enough tiles already
-        if(counter < 50)
+        if(counter < 50 && tileManager.GetComponent<TileMaster>().tiles.Count < 500)
         {
             float randNum = Random.Range(0.0f, 1.0f);
 
@@ -54,11 +58,11 @@ public class Pathmaker : MonoBehaviour {
                 GameObject pathmakerInstance = Instantiate(pathmakerSpherePrefab.gameObject, transform.position, Quaternion.identity);
             }
 
-            Instantiate(floorPrefab.gameObject, transform.position, Quaternion.identity);
+            TileMaker();
 
-            Debug.Log("facing: " + transform.eulerAngles);
-            this.transform.Translate(Vector3.forward * 5);
-            Debug.Log("position: " + transform.position);
+            //Debug.Log("facing: " + transform.eulerAngles);
+            this.transform.Translate(Vector3.forward * 2);
+            //Debug.Log("position: " + transform.position);
             counter++;
 
         }
@@ -67,6 +71,27 @@ public class Pathmaker : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
+
+    void TileMaker()
+    {
+        float rNum = Random.Range(0.0f, 1.0f);
+
+        if (rNum < 0.33f)
+        {
+            GameObject town = Instantiate(townPrefab.gameObject, transform.position, Quaternion.identity);
+            tileManager.GetComponent<TileMaster>().tiles.Add(town);
+        }
+        else if (rNum >= 0.33f && rNum < 0.80f)
+        {
+            GameObject lake = Instantiate(lkPrefab.gameObject, transform.position, Quaternion.identity);
+            tileManager.GetComponent<TileMaster>().tiles.Add(lake);
+        }
+        else if (rNum >= 0.80f)
+        {
+            GameObject mtn = Instantiate(mtnPrefab.gameObject, transform.position, Quaternion.identity);
+            tileManager.GetComponent<TileMaster>().tiles.Add(mtn);
+        }
+    }
 
 } // end of class scope
 
